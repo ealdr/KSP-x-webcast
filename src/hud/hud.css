@@ -1,0 +1,510 @@
+/* ── Global reset ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #020408;
+  color: #f0f4f8;
+  font-family: 'IBM Plex Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Subtle square grid overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.026) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── HUD bar ──────────────────────────────────────────────── */
+.hud {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(2, 4, 8, 0.70);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  user-select: none;
+  z-index: 10;
+}
+
+/* ── Timeline row ─────────────────────────────────────────── */
+.timeline-row {
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+  width: 100%;
+  padding: 0 16px;
+  padding-top: 0;
+  margin-bottom: -62px;
+}
+
+.timeline-svg {
+  display: block;
+  width: 100%;
+  height: 80px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* ── Telemetry row ────────────────────────────────────────── */
+.telemetry-row {
+  display: flex;
+  align-items: center;
+  padding: 4px 28px 8px;
+  gap: 0;
+}
+
+/* ── Sections (inside .telemetry-row) ────────────────────── */
+.hud-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.hud-left   { flex: 1; align-items: flex-start; }
+.hud-center { flex: 0 0 auto; align-items: center; padding: 0 36px; padding-top: 18px; }
+.hud-right  { flex: 1; align-items: flex-end; }
+
+.hud-divider {
+  width: 1px;
+  height: 115px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Dial ─────────────────────────────────────────────────── */
+.dial-wrap {
+  position: relative;
+  width: 180px;
+  height: 150px;
+}
+
+.dial-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.dial-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.07);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.dial-fill {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.88);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgba(160, 200, 255, 0.55)) drop-shadow(0 0 2px rgba(255,255,255,0.70));
+}
+
+.dial-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6px;
+}
+
+.dial-number {
+  font-size: 42px;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.dial-unit {
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(180, 200, 230, 0.40);
+  margin-top: 4px;
+}
+
+/* ── Dial section label (SPEED / ALTITUDE) ────────────────── */
+.dial-label {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(180, 200, 230, 0.38);
+}
+
+/* ── Stage label ──────────────────────────────────────────── */
+.stage-label {
+  font-size: 8px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(180, 200, 230, 0.28);
+  white-space: nowrap;
+  margin-top: 2px;
+}
+
+/* ── MET clock ────────────────────────────────────────────── */
+.met-clock {
+  font-family: 'IBM Plex Mono', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: #ffffff;
+  white-space: nowrap;
+  text-shadow: 0 0 24px rgba(160, 200, 255, 0.30);
+}
+
+.met-clock.pre-launch {
+  color: rgba(255, 255, 255, 0.28);
+  text-shadow: none;
+}
+
+/* ── HUD note ─────────────────────────────────────────────── */
+.hud-note {
+  font-size: 7px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(180, 200, 230, 0.22);
+  margin-top: 6px;
+  white-space: nowrap;
+}
+
+/* ── Mission name ─────────────────────────────────────────── */
+.mission-name {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.30em;
+  text-transform: uppercase;
+  color: rgba(180, 200, 230, 0.38);
+  margin-top: 5px;
+}
+
+/* ── START button ─────────────────────────────────────────── */
+.start-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 2px;
+  color: rgba(255, 255, 255, 0.72);
+  cursor: pointer;
+  font-family: 'IBM Plex Sans', 'Inter', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 6px 22px;
+  margin-top: 8px;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.start-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+}
+
+.start-btn:active {
+  transform: scale(0.97);
+}
+
+/* ── Profile selector ─────────────────────────────────────── */
+.profile-select {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  color: rgba(180, 200, 230, 0.55);
+  cursor: pointer;
+  font-family: 'IBM Plex Sans', 'Inter', system-ui, sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  outline: none;
+  margin-bottom: 6px;
+  align-self: flex-start;
+}
+
+.profile-select:focus {
+  border-color: rgba(160, 200, 255, 0.40);
+}
+
+.profile-select option {
+  background: #020408;
+  color: #f0f4f8;
+}
+
+/* ── Connection status dot ────────────────────────────────── */
+.conn-dot {
+  position: fixed;
+  bottom: 8px;
+  right: 12px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(160, 210, 255, 0.85);
+  z-index: 20;
+  transition: background 0.3s;
+  box-shadow: 0 0 6px rgba(160, 210, 255, 0.50);
+}
+
+.conn-dot.error      { background: rgba(255, 90, 90, 0.85);  box-shadow: 0 0 6px rgba(255, 90, 90, 0.45); }
+.conn-dot.connecting { background: rgba(255, 200, 80, 0.85); box-shadow: 0 0 6px rgba(255,200, 80, 0.45); }
+.conn-dot.demo       { background: rgba(255, 200, 80, 0.85); box-shadow: 0 0 6px rgba(255,200, 80, 0.45); }
+
+/* ── Camera grid ──────────────────────────────────────────── */
+.cam-grid {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  background: #000;
+}
+
+.cam-grid.mode-1 { grid-template-columns: 1fr; }
+.cam-grid.mode-2 { grid-template-columns: 1fr 1fr; }
+.cam-grid.mode-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; }
+.cam-grid.mode-6 { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr; }
+
+.cam-grid iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+  background: #000;
+}
+
+/* ── Camera control panel (top-left) ──────────────────────── */
+.cam-panel {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 15;
+  font-family: 'IBM Plex Sans', 'Inter', system-ui, sans-serif;
+}
+
+/* Setup view */
+.cam-setup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(2, 4, 8, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  padding: 10px 12px;
+  min-width: 220px;
+}
+
+.cam-setup label {
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: rgba(180, 200, 230, 0.45);
+}
+
+.cam-url-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cam-url-row {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.cam-url-row input[type="text"] {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 2px;
+  color: #f0f4f8;
+  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-size: 11px;
+  padding: 4px 7px;
+  outline: none;
+}
+
+.cam-url-row input[type="text"]:focus {
+  border-color: rgba(160, 200, 255, 0.40);
+}
+
+.remove-cam-btn {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  color: rgba(180, 200, 230, 0.45);
+  cursor: pointer;
+  font-size: 11px;
+  padding: 3px 6px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.remove-cam-btn:hover { color: #ffffff; border-color: rgba(255,255,255,0.25); }
+
+.add-cam-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  color: rgba(180, 200, 230, 0.55);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 10px;
+  padding: 5px 10px;
+  flex: 1;
+}
+
+.add-cam-btn:hover { background: rgba(255,255,255,0.05); }
+
+.cam-setup-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.add-cam-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.connect-btn {
+  flex: 1;
+}
+
+.cam-setup input[type="text"] {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 2px;
+  color: #f0f4f8;
+  font-family: 'IBM Plex Mono', 'Consolas', monospace;
+  font-size: 12px;
+  padding: 5px 8px;
+  outline: none;
+  width: 100%;
+}
+
+.cam-setup input[type="text"]:focus {
+  border-color: rgba(160, 200, 255, 0.40);
+}
+
+.cam-status {
+  font-size: 10px;
+  color: rgba(180, 200, 230, 0.45);
+  min-height: 14px;
+}
+
+.connect-btn {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 2px;
+  color: rgba(255, 255, 255, 0.78);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  padding: 6px 10px;
+  text-transform: uppercase;
+  transition: background 0.15s;
+}
+
+.connect-btn:hover {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+/* Active view */
+.cam-active {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(2, 4, 8, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 3px;
+  padding: 6px 8px;
+}
+
+.cam-arrow-btn,
+.cam-settings-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  padding: 4px 8px;
+  transition: background 0.12s;
+}
+
+.cam-arrow-btn:hover,
+.cam-settings-btn:hover {
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
+}
+
+.cam-label {
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(180, 200, 230, 0.65);
+  min-width: 60px;
+  text-align: center;
+}
+
+.cam-settings-btn {
+  margin-left: 4px;
+  font-size: 12px;
+}
+
+.cam-mode-divider {
+  color: rgba(255, 255, 255, 0.12);
+  font-size: 13px;
+  margin: 0 2px;
+}
+
+.cam-mode-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 2px;
+  color: rgba(180, 200, 230, 0.50);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 400;
+  font-family: inherit;
+  line-height: 1;
+  padding: 4px 7px;
+  transition: background 0.12s;
+}
+
+.cam-mode-btn:hover { background: rgba(255, 255, 255, 0.09); color: #ffffff; }
+.cam-mode-btn.active {
+  background: rgba(160, 200, 255, 0.12);
+  border-color: rgba(160, 200, 255, 0.32);
+  color: rgba(200, 225, 255, 0.88);
+}
