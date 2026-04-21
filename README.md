@@ -180,7 +180,8 @@ Any milestone marker on the timeline can be dragged left or right to adjust its 
 
   1. In OBS, add a **Browser Source**
   2. Set the URL to `http://localhost:3000`
-  3. Set width and height to match your stream resolution (e.g. 1920×1080)
+  3. Set width and height to match your stream resolution (e.g. 1920×1080) - this also impacts how much of the timeline covers the video streams.
+  4. Right click and click interact. - This will allow you to input the JRTI URL links.
 
   The camera feed, HUD, and timeline will composite directly in OBS for recording.
 
