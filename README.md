@@ -13,11 +13,27 @@
 
 Welcome to **KSP-X Webcast**; a SpaceX-style live telemetry overlay for Kerbal Space Program. It composites a real-time HUD with speed, altitude, MET clock, and a mission timeline arc over [JustReadTheInstructions](https://github.com/RELMYMathieu/JustReadTheInstructions) HullCam feeds, powered by [Telemachus Reborn](https://github.com/TeleIO/Telemachus-1) for live flight data - taking inspiration from [Houston](https://github.com/TeleIO/houston).
 
-<img width="2546" height="1264" alt="image" src="https://github.com/user-attachments/assets/ea1c32d8-79fd-4b07-ac53-3581fc2d1152" />
-<img width="504" height="175" alt="image" src="https://github.com/user-attachments/assets/f4ec2ef8-3dad-4539-81a7-446c838cfa52" />
-<img width="320" height="38" alt="image" src="https://github.com/user-attachments/assets/c463043b-d2aa-4f4d-8e11-34137e643a65" />
-<img width="223" height="149" alt="image" src="https://github.com/user-attachments/assets/ac808327-bf04-4b76-8bce-983b4d35bb71" />
-<img width="157" height="127" alt="image" src="https://github.com/user-attachments/assets/aef66d0c-b8ee-45cf-acf7-72d611e55fa5" />
+ ## Screenshots
+
+  <img width="100%" alt="Full overlay"
+  src="https://github.com/user-attachments/assets/ea1c32d8-79fd-4b07-ac53-3581fc2d1152" />
+
+  <br/>
+
+  <table>
+    <tr>
+      <td><img width="400" alt="Camera panel"
+  src="https://github.com/user-attachments/assets/f4ec2ef8-3dad-4539-81a7-446c838cfa52" /></td>
+      <td>
+        <img width="260" alt="HUD note"
+  src="https://github.com/user-attachments/assets/c463043b-d2aa-4f4d-8e11-34137e643a65" /><br/><br/>
+        <img width="200" alt="Camera controls"
+  src="https://github.com/user-attachments/assets/ac808327-bf04-4b76-8bce-983b4d35bb71" />
+        <img width="160" alt="Mode buttons"
+  src="https://github.com/user-attachments/assets/aef66d0c-b8ee-45cf-acf7-72d611e55fa5" />
+      </td>
+    </tr>
+  </table>
 
 
 
