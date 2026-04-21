@@ -180,6 +180,21 @@ Any milestone marker on the timeline can be dragged left or right to adjust its 
   quickly for the detection window
   - **Kerbin only** - MAX-Q uses Kerbin's atmosphere model and will not calculate correctly on other planets
   - **Node.js required** - the overlay needs a local dev server to run, it cannot be opened as a plain HTML file
+
+---
+
+ ## Feature Requests
+
+  If there is a feature you would like to see added, [open an issue on
+  GitHub](https://github.com/ealdr/ksp-x-webcast/issues) with the label **enhancement** and describe:
+
+  - What you want the feature to do
+  - Why it would be useful
+  - Any examples from real rocket webcasts you are trying to replicate
+
+  All suggestions are welcome.
+
+
 ---
 ## Thanks to
 
