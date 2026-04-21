@@ -45,7 +45,7 @@ Welcome to **KSP-X Webcast**; a SpaceX-style live telemetry overlay for Kerbal S
 - **Mission Elapsed Time clock** - large `T+HH:MM:SS` display, auto-starts on liftoff
 - **Mission timeline arc** - curved arc with draggable milestone markers (LIFTOFF, MAX-Q, MECO, SECO, and more)
 - **MAX-Q auto-detection** - calculates dynamic pressure live using Kerbin's atmosphere model (Q = ½ρv²), marker approaches in real time and locks when the peak is confirmed
-- **MECO / SECO auto-detection** - detects engine cutoffs by watching for sustained speed deceleration, no thrust data needed
+- **MECO / SECO auto-detection** - detects engine cutoffs by watching for sustained speed deceleration.
 - **Live camera feeds** - paste any JRTI HullCam URL and it appears full-screen behind the HUD
 - **Multi-camera grid** - 1, 2, 4, or 6 camera layouts with arrow-button cycling
 - **Demo mode** - runs a simulated Kerbin launch when KSP is not connected, so you can preview the overlay any time
