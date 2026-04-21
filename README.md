@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/logo.png" alt="KSP-X Webcast" width="700">
+  <img src="images/logo.png" alt="KSP-X Webcast" width="700">
 </p>
 
 <p align="center">
