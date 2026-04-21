@@ -125,7 +125,7 @@ Open `http://localhost:3000` in your browser (or `http://YOUR_LAN_IP:3000` from 
 
 **4. Select a mission profile** from the dropdown on the left side of the HUD.
 
-**5. Press START** when you are ready to begin the mission timer, or it will auto-start the moment your rocket lifts off.
+**5. Press START** in the VAB when you are ready to set the mission timer and milestones, and it will auto-start the moment your rocket lifts off.
 
 ---
 
