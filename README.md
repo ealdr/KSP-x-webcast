@@ -1,9 +1,8 @@
 <p align="center">
   <img src="images/logo.png" alt="KSP-X Webcast" width="700">
 </p>
-
 <p align="center">
-  <a href="https://github.com/ealdr/ksp-x-webcast/releases/latest"><img src="https://img.shields.io/badge/release-v1.0-3da9fc?style=flat-square" alt="Release"></a>
+  <a href="https://github.com/ealdr/ksp-x-webcast/releases/latest"><img src="https://img.shields.io/github/v/release/ealdr/ksp-x-webcast?style=flat-square&color=3da9fc&label=release" alt="Release"></a>
   <a href="https://github.com/ealdr/ksp-x-webcast/releases"><img src="https://img.shields.io/github/downloads/ealdr/ksp-x-webcast/total?style=flat-square&color=3da9fc&label=downloads" alt="Downloads"></a>
   <a href="https://github.com/ealdr/ksp-x-webcast/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-3da9fc?style=flat-square" alt="License"></a>
 </p>
